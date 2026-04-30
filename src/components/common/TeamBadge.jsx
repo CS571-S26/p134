@@ -1,26 +1,27 @@
 function TeamBadge({ seed, name, conference, record, selected, onClick }) {
-  return (
-    <div
-      onClick={onClick}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "0.75rem",
-        padding: "0.75rem 1rem",
-        borderRadius: "8px",
-        border: selected ? "2px solid #c0392b" : "2px solid #e8e6e1",
-        backgroundColor: selected ? "#fdf0ef" : "#ffffff",
-        cursor: onClick ? "pointer" : "default",
-        transition: "all 0.15s ease",
-      }}
-    >
+  const commonStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.75rem",
+    padding: "0.75rem 1rem",
+    borderRadius: "8px",
+    border: selected ? "2px solid #a92f24" : "2px solid #d9d4dc",
+    backgroundColor: selected ? "#f8d7d4" : "#ffffff",
+    cursor: onClick ? "pointer" : "default",
+    transition: "all 0.15s ease",
+    width: "100%",
+    textAlign: "left",
+  };
+
+  const content = (
+    <>
       <span
         style={{
           width: "28px",
           height: "28px",
           borderRadius: "50%",
-          backgroundColor: selected ? "#c0392b" : "#e8e6e1",
-          color: selected ? "#ffffff" : "#6b6375",
+          backgroundColor: selected ? "#a92f24" : "#e8e6e1",
+          color: selected ? "#ffffff" : "#4f4759",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -31,16 +32,26 @@ function TeamBadge({ seed, name, conference, record, selected, onClick }) {
       >
         {seed}
       </span>
-      <div style={{ minWidth: 0 }}>
-        <div style={{ fontWeight: "600", fontSize: "0.95rem", color: "#08060d", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+      <span style={{ minWidth: 0 }}>
+        <span style={{ display: "block", fontWeight: "700", fontSize: "0.95rem", color: "#08060d", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
           {name}
-        </div>
-        <div style={{ fontSize: "0.78rem", color: "#9ca3af" }}>
+        </span>
+        <span style={{ display: "block", fontSize: "0.78rem", color: "#5c5566" }}>
           {conference} · {record}
-        </div>
-      </div>
-    </div>
+        </span>
+      </span>
+    </>
   );
+
+  if (onClick) {
+    return (
+      <button type="button" onClick={onClick} aria-pressed={selected} style={commonStyle}>
+        {content}
+      </button>
+    );
+  }
+
+  return <div style={commonStyle}>{content}</div>;
 }
 
 export default TeamBadge;

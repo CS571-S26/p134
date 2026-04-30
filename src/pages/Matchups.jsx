@@ -59,7 +59,7 @@ function Matchups() {
     <div style={{ backgroundColor: "#f8f7f4", minHeight: "100vh" }}>
       <div style={{ backgroundColor: "#ffffff", borderBottom: "1px solid #e8e6e1", padding: "2.5rem 0" }}>
         <Container>
-          <p style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: "0.78rem", color: "#9ca3af", fontWeight: "600", marginBottom: "0.4rem" }}>
+          <p style={{ textTransform: "uppercase", letterSpacing: "0.1em", fontSize: "0.78rem", color: "#5c5566", fontWeight: "600", marginBottom: "0.4rem" }}>
             NCAA Tournament
           </p>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "1rem" }}>
@@ -73,16 +73,19 @@ function Matchups() {
                   : "2025 Round of 64 completed results."}
               </p>
             </div>
-            <Form.Select size="sm" value={mode} onChange={(e) => setMode(e.target.value)}
-              style={{ fontSize: "0.85rem", borderColor: "#e8e6e1", borderRadius: "8px", width: "auto" }}>
-              <option value="team">Team Mode</option>
-              <option value="player">Player Mode</option>
-              <option value="coach">Coach Mode</option>
-            </Form.Select>
+            <Form.Group controlId="matchup-mode">
+              <Form.Label className="visually-hidden">Evaluation mode</Form.Label>
+              <Form.Select size="sm" value={mode} onChange={(e) => setMode(e.target.value)}
+                style={{ fontSize: "0.85rem", borderColor: "#d9d4dc", borderRadius: "8px", width: "auto" }}>
+                <option value="team">Team Mode</option>
+                <option value="player">Player Mode</option>
+                <option value="coach">Coach Mode</option>
+              </Form.Select>
+            </Form.Group>
           </div>
           <div style={{ display: "flex", gap: "0.4rem", marginTop: "1.25rem" }}>
             {["2026", "2025"].map((y) => (
-              <button key={y} onClick={() => handleTabChange(y)} style={{
+              <button key={y} type="button" onClick={() => handleTabChange(y)} style={{
                 padding: "0.35rem 1rem", borderRadius: "20px",
                 border: tab === y ? "2px solid #c0392b" : "2px solid #e8e6e1",
                 backgroundColor: tab === y ? "#c0392b" : "#ffffff",
@@ -99,7 +102,7 @@ function Matchups() {
       <Container className="py-4">
         <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
           {REGIONS.map((r) => (
-            <button key={r} onClick={() => { setRegion(r); setSelected(null); }} style={{
+            <button key={r} type="button" onClick={() => { setRegion(r); setSelected(null); }} style={{
               padding: "0.35rem 0.9rem", borderRadius: "20px",
               border: region === r ? "2px solid #08060d" : "2px solid #e8e6e1",
               backgroundColor: region === r ? "#08060d" : "#ffffff",
@@ -114,12 +117,12 @@ function Matchups() {
             <div style={{ backgroundColor: "#ffffff", borderRadius: "12px", border: "1px solid #e8e6e1", overflow: "hidden" }}>
               <div style={{ padding: "0.75rem 1.25rem", borderBottom: "1px solid #e8e6e1", fontSize: "0.85rem", fontWeight: "600", color: "#08060d", display: "flex", justifyContent: "space-between" }}>
                 <span>{filtered.length} matchups</span>
-                {tab === "2026" && <span style={{ fontSize: "0.75rem", color: "#9ca3af", fontWeight: "400" }}>Results TBD</span>}
+                {tab === "2026" && <span style={{ fontSize: "0.75rem", color: "#5c5566", fontWeight: "400" }}>Results TBD</span>}
               </div>
               <div style={{ maxHeight: "520px", overflowY: "auto" }}>
                 {filtered.map((m, i) => (
-                  <div key={i} onClick={() => setSelected(selected === i ? null : i)} style={{
-                    padding: "0.75rem 1.25rem", borderBottom: "1px solid #f0eeeb",
+                  <button key={i} type="button" onClick={() => setSelected(selected === i ? null : i)} aria-pressed={selected === i} style={{
+                    width: "100%", border: "none", padding: "0.75rem 1.25rem", borderBottom: "1px solid #f0eeeb",
                     cursor: "pointer", backgroundColor: selected === i ? "#f8f7f4" : "transparent",
                   }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
@@ -132,13 +135,13 @@ function Matchups() {
                         </div>
                       </div>
                       <div style={{ textAlign: "right", flexShrink: 0 }}>
-                        <div style={{ fontSize: "0.75rem", color: "#b0aab8" }}>{m.region}</div>
+                        <div style={{ fontSize: "0.75rem", color: "#5c5566" }}>{m.region}</div>
                         {m.score
                           ? <div style={{ fontSize: "0.8rem", fontWeight: "600", color: "#6b6375" }}>{m.score}</div>
-                          : <div style={{ fontSize: "0.72rem", color: "#d4cfd9", fontStyle: "italic" }}>upcoming</div>}
+                          : <div style={{ fontSize: "0.72rem", color: "#6f6878", fontStyle: "italic" }}>upcoming</div>}
                       </div>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
@@ -147,13 +150,13 @@ function Matchups() {
           <Col md={7}>
             <div style={{ backgroundColor: "#ffffff", borderRadius: "12px", border: "1px solid #e8e6e1", padding: "1.5rem", minHeight: "400px" }}>
               {!matchup ? (
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "360px", color: "#b0aab8", textAlign: "center" }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "360px", color: "#5c5566", textAlign: "center" }}>
                   <div style={{ fontSize: "2.5rem", marginBottom: "0.75rem" }}>📋</div>
                   <p style={{ margin: 0, fontSize: "0.95rem" }}>Select a matchup to compare stats</p>
                 </div>
               ) : (
                 <>
-                  <div style={{ fontSize: "0.75rem", color: "#9ca3af", marginBottom: "1rem", textTransform: "uppercase", letterSpacing: "0.06em", textAlign: "left" }}>
+                  <div style={{ fontSize: "0.75rem", color: "#5c5566", marginBottom: "1rem", textTransform: "uppercase", letterSpacing: "0.06em", textAlign: "left" }}>
                     {matchup.region} Region · Round of 64 · {tab === "2026" ? "2026 Tournament" : "2025 Tournament"}
                   </div>
                   <Row className="g-2 mb-3">
@@ -179,7 +182,7 @@ function Matchups() {
                         </div>
                       </>
                     ) : (
-                      <div style={{ padding: "0.4rem 0.9rem", backgroundColor: "#f8f7f4", borderRadius: "6px", fontSize: "0.82rem", fontWeight: "600", color: "#9ca3af", border: "1px solid #e8e6e1" }}>
+                      <div style={{ padding: "0.4rem 0.9rem", backgroundColor: "#f8f7f4", borderRadius: "6px", fontSize: "0.82rem", fontWeight: "600", color: "#5c5566", border: "1px solid #e8e6e1" }}>
                         2026 Tournament — result pending
                       </div>
                     )}
@@ -188,16 +191,16 @@ function Matchups() {
                     <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem", flexWrap: "wrap" }}>
                       <div style={{ flex: 1, backgroundColor: "#f8f7f4", borderRadius: "8px", padding: "0.6rem 0.8rem", fontSize: "0.78rem", textAlign: "left" }}>
                         <div style={{ fontWeight: "700", color: "#08060d", marginBottom: "0.1rem" }}>{statsA.coachName}</div>
-                        <div style={{ color: "#9ca3af" }}>{statsA.coachWins} NCAA tourney wins</div>
+                        <div style={{ color: "#5c5566" }}>{statsA.coachWins} NCAA tourney wins</div>
                       </div>
                       <div style={{ flex: 1, backgroundColor: "#f8f7f4", borderRadius: "8px", padding: "0.6rem 0.8rem", fontSize: "0.78rem", textAlign: "right" }}>
                         <div style={{ fontWeight: "700", color: "#08060d", marginBottom: "0.1rem" }}>{statsB.coachName}</div>
-                        <div style={{ color: "#9ca3af" }}>{statsB.coachWins} NCAA tourney wins</div>
+                        <div style={{ color: "#5c5566" }}>{statsB.coachWins} NCAA tourney wins</div>
                       </div>
                     </div>
                   )}
                   <div style={{ borderTop: "1px solid #f0eeeb", paddingTop: "1.25rem" }}>
-                    <div style={{ fontSize: "0.78rem", fontWeight: "600", color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "1rem", textAlign: "left" }}>
+                    <div style={{ fontSize: "0.78rem", fontWeight: "600", color: "#5c5566", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "1rem", textAlign: "left" }}>
                       2025-26 Season Stats — {mode === "team" ? "Team" : mode === "player" ? "Player" : "Coach"} Mode
                     </div>
                     {statsA && statsB
@@ -207,7 +210,7 @@ function Matchups() {
                             valueA={statsA[key] ?? 0} valueB={statsB[key] ?? 0}
                             maxValue={max} nameA={matchup.team1} nameB={matchup.team2} />
                         ))
-                      : <p style={{ color: "#b0aab8", fontSize: "0.85rem", textAlign: "left" }}>Stats not available.</p>
+                      : <p style={{ color: "#5c5566", fontSize: "0.85rem", textAlign: "left" }}>Stats not available.</p>
                     }
                   </div>
                 </>

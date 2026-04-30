@@ -25,7 +25,7 @@ const MODES = [
 
 const STATS = [
   { value: "68", label: "Teams" },
-  { value: "64", label: "Matchups" },
+  { value: "63", label: "Games" },
   { value: "3", label: "Eval Modes" },
   { value: "∞", label: "Brackets" },
 ];
@@ -79,7 +79,7 @@ function Home() {
             }}
           >
             Build smarter March Madness brackets with matchup insights,
-            adjustable evaluation modes, and side by side bracket comparison.
+            adjustable evaluation modes, full bracket picks, news links, and side by side bracket comparison.
           </p>
           <div className="d-flex justify-content-center gap-3 flex-wrap">
             <Button
@@ -160,7 +160,7 @@ function Home() {
             Ready to beat your pool?
           </h2>
           <p style={{ color: "#9ca3af", marginBottom: "2rem", fontSize: "1rem" }}>
-            Start filling in your bracket with data backed picks.
+            Start filling in your bracket with data backed picks from the first round through the title game.
           </p>
           <Button
             onClick={() => navigate("/build")}

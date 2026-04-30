@@ -48,8 +48,8 @@ function NavBar() {
               to="/"
               end
               style={({ isActive }) => ({
-                color: isActive ? "#08060d" : "#6b6375",
-                fontWeight: isActive ? "600" : "400",
+                color: isActive ? "#08060d" : "#4f4759",
+                fontWeight: isActive ? "700" : "500",
                 fontSize: "0.95rem",
                 padding: "0.4rem 0.75rem",
               })}
@@ -60,8 +60,8 @@ function NavBar() {
               as={NavLink}
               to="/matchups"
               style={({ isActive }) => ({
-                color: isActive ? "#08060d" : "#6b6375",
-                fontWeight: isActive ? "600" : "400",
+                color: isActive ? "#08060d" : "#4f4759",
+                fontWeight: isActive ? "700" : "500",
                 fontSize: "0.95rem",
                 padding: "0.4rem 0.75rem",
               })}
@@ -72,13 +72,25 @@ function NavBar() {
               as={NavLink}
               to="/compare"
               style={({ isActive }) => ({
-                color: isActive ? "#08060d" : "#6b6375",
-                fontWeight: isActive ? "600" : "400",
+                color: isActive ? "#08060d" : "#4f4759",
+                fontWeight: isActive ? "700" : "500",
                 fontSize: "0.95rem",
                 padding: "0.4rem 0.75rem",
               })}
             >
               Compare
+            </Nav.Link>
+            <Nav.Link
+              as={NavLink}
+              to="/news"
+              style={({ isActive }) => ({
+                color: isActive ? "#08060d" : "#4f4759",
+                fontWeight: isActive ? "700" : "500",
+                fontSize: "0.95rem",
+                padding: "0.4rem 0.75rem",
+              })}
+            >
+              News
             </Nav.Link>
             <Button
               variant="dark"
